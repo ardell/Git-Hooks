@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+$commands = array(
+    '.git/hooks/run-php-lint',
+    '.git/hooks/check-whitespace',
+    '.git/hooks/run-phpunit',
+);
+
+foreach ($commands as $command) {
+    $output = array();
+    $return = 0;
+    exec($command, $output, $return);
+    if ($return != 0) {
+        echo implode("\n", $output) . "\n";
+        exit(1);
+    }
+}
