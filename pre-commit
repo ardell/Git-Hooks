@@ -4,6 +4,7 @@
 $commands = array(
     '.git/hooks/run-php-lint',
     '.git/hooks/check-whitespace',
+    '.git/hooks/warn-on-tab-characters',
     '.git/hooks/run-phpunit',
 );
 

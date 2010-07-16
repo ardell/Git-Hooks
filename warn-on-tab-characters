@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+$tabCharacterRegex = "/\t/";
+
+$return = NULL;
+$output = array();
+exec("git diff --cached HEAD --", $output, $return);
+$contentsOfIndex = implode("\n", $output);
+
+if (preg_match($tabCharacterRegex, $contentsOfIndex))
+{
+    foreach ($output as $line) {
+        if (preg_match($tabCharacterRegex, $line)) {
+            echo "Tabs found:\n" . preg_replace($tabCharacterRegex, "[tab]", $line);
+        }
+    }
+    exit(1);
+}
