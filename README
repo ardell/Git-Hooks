@@ -1,0 +1,6 @@
+A set of hooks for git for various projects.
+
+Symlink this directory to .git/hooks to start
+using.  If you do not wish to use a particular
+hook, simply rename it to [hook].sample, for
+example pre-commit becomes pre-commit.sample.
