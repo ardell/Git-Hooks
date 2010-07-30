@@ -11,7 +11,7 @@ $cmd = "grep -PIlsr '\\r\\n' . | grep -v '.git'";
 
 exec($cmd, $output, $return);
 if ($return != 1) {
-    echo "DOS line endings detected" . implode("\n", $output);
+    echo "DOS line endings detected\n" . implode("\n", $output);
     $exit_status = 1;
     exit($exit_status);
 }
