@@ -1,17 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-$commands = array(
-    '.git/hooks/run-php-lint',
-    '.git/hooks/check-whitespace',
-    '.git/hooks/warn-on-tab-characters',
-    '.git/hooks/run-phpunit',
-);
+require __DIR__ . '/Config.php';
 
-foreach ($commands as $command) {
+$commandsToRun = $CONFIG['preCommit'];
+foreach ($commandsToRun as $command) {
     $output = array();
     $return = 0;
-    exec($command, $output, $return);
+    exec(".git/hooks/{$command}", $output, $return);
     if ($return != 0) {
         echo implode("\n", $output) . "\n";
         exit(1);

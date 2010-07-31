@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/Config.php';
+$codingStandard = $CONFIG['codingStandard'];
+
+$output = array();
+$return = 0;
+exec('git rev-parse --verify HEAD 2> /dev/null', $output, $return);
+$against = $return == 0 ? 'HEAD' : '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
+
+exec("git diff-index --cached --name-only {$against}", $output);
+
+$filename_pattern = '/\.php$/';
+$exit_status = 0;
+
+foreach ($output as $file) {
+    if (!preg_match($filename_pattern, $file)) {
+        // don't check files that aren't PHP
+        continue;
+    }
+
+    $output = array();
+    exec("phpcs --standard={$codingStandard} " . escapeshellarg($file), $output, $return);
+    if ($return != 0) {
+        echo implode("\n", $output), "\n";
+        $exit_status = 1;
+        exit($exit_status);
+    }
+}
