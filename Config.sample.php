@@ -3,6 +3,7 @@
 
 $CONFIG['preCommit'] = array(
     'run-php-lint',
+    'check-for-dos-endings',
     'check-whitespace',
     'enforce-coding-standards',
     'run-phpunit',
