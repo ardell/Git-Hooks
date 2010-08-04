@@ -4,6 +4,8 @@
 require dirname(__FILE__) . '/Config.php';
 
 $commandsToRun = $CONFIG['preCommit'];
+if (!is_array($commandsToRun)) exit(0);
+
 foreach ($commandsToRun as $command) {
     $output = array();
     $return = 0;
