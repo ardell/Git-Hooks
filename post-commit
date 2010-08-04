@@ -1,7 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-require dirname(__FILE__) . '/Config.php';
+$dirname = dirname(__FILE__);
+require "{$dirname}/Config.php";
 
 $commandsToRun = $CONFIG['postCommit'];
 if (!is_array($commandsToRun)) exit(0);
@@ -9,7 +10,7 @@ if (!is_array($commandsToRun)) exit(0);
 foreach ($commandsToRun as $command) {
     $output = array();
     $return = 0;
-    exec(".git/hooks/{$command}", $output, $return);
+    exec("{$dirname}/{$command}", $output, $return);
     if ($return != 0) {
         echo implode("\n", $output) . "\n";
         exit(1);

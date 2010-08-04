@@ -1,3 +1,8 @@
-#!/bin/sh
-# From: http://collectiveidea.com/blog/archives/2010/08/03/happy-git-commits/
-afplay ./extras/happykids.wav > /dev/null 2>&1 &
+#!/usr/bin/env php
+<?php
+
+// From: http://collectiveidea.com/blog/archives/2010/08/03/happy-git-commits/
+$currentDir = dirname(__FILE__);
+$command = "afplay {$currentDir}/extras/happykids.wav > /dev/null 2>&1 &";
+exec($command);
+exit(0);
