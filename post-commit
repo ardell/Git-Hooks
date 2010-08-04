@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+require dirname(__FILE__) . '/Config.php';
+
+$commandsToRun = $CONFIG['postCommit'];
+foreach ($commandsToRun as $command) {
+    $output = array();
+    $return = 0;
+    exec(".git/hooks/{$command}", $output, $return);
+    if ($return != 0) {
+        echo implode("\n", $output) . "\n";
+        exit(1);
+    }
+}
